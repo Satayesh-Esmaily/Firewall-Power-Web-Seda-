@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>سِدا پلتفرم | کتابخانه</title>
+
+  <meta name="description" content="کتابخانه آموزشی امنیت دیجیتال – ویدیو، راهنما، کوییز و کتاب.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root{
+      --primary:#A48374; --primary-hover:#8C6B5F; --secondary:#CBAD8D;
+      --text-dark:#3A2D28; --text-muted:#A48374;
+      --bg-light:#F1EDE6; --bg-section:#EBE3DB; --max-width:1100px;
+      --surface:#FFFFFF; --border:#D1C7BD; --radius:14px; --shadow:0 8px 24px rgba(58,45,40,.10);
+      --h1: clamp(22px, 4vw, 28px);
+      --rating-yellow:#FFC107;             
+      --vh: 1vh;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:"Vazirmatn",sans-serif;background:var(--bg-light);color:var(--text-dark);line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;height:auto}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    @media (max-width:480px){ .container{padding:0 14px} }
+    :focus-visible{outline:2px solid var(--primary); outline-offset:3px}
+
+    /* Header (home style) */
+    header{background:var(--bg-light);border-bottom:1px solid #ddd;position:sticky;top:0;z-index:900}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+    .logo{font-weight:700;font-size:20px;color:var(--text-dark)} .logo span{color:var(--primary)}
+    nav ul{display:flex;list-style:none;gap:30px}
+    nav ul li a{display:flex;align-items:center;gap:8px;font-weight:500;transition:color .3s}
+    nav ul li a i{color:var(--primary);font-size:16px}
+    nav ul li a:hover{color:var(--primary)}
+    .btn-header{background:var(--primary);color:#fff;padding:8px 16px;border-radius:6px;font-weight:600;transition:background .3s}
+    .btn-header:hover{background:var(--primary-hover)}
+    .hamburger{display:none;flex-direction:column;justify-content:center;cursor:pointer;width:28px;height:22px;gap:5px}
+    .hamburger span{background:var(--text-dark);height:3px;border-radius:2px;width:100%}
+    .mobile-nav{display:none;background:var(--bg-light);border-top:1px solid #ddd;text-align:center;flex-direction:column;gap:15px;padding:15px 0;box-shadow:0 6px 15px rgba(0,0,0,.1);opacity:0;transform:translateY(-10px);transition:all .4s;position:relative;z-index:880}
+    .mobile-nav a{display:flex;justify-content:center;align-items:center;gap:8px;font-weight:500}
+    .mobile-nav a i{color:var(--primary)}
+    .mobile-nav a:hover{color:var(--primary)}
+    .mobile-nav.active{display:flex;opacity:1;transform:translateY(0)}
+    @media (max-width:900px){ nav ul{display:none}.btn-header{display:none}.hamburger{display:flex} }
+    .hero{padding:40px 0;background:var(--bg-section)}
+    .hero h1{font-size:var(--h1);margin-bottom:6px}
+    .hero p{color:var(--text-muted);font-size:15px}
+
+    .controls{position:sticky;top:70px;background:var(--bg-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);z-index:850}
+    .controls .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0}
+    .tabs{background:var(--bg-section);padding:6px;border-radius:999px;display:flex;gap:6px;border:1px solid var(--border)}
+    .tab{padding:6px 12px;border-radius:999px;border:1px solid transparent;background:#0000;cursor:pointer}
+    .tab:hover{background:#fff}.tab.active{background:var(--primary);color:#fff}
+    .search{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+    .input{width:min(70vw, 320px);padding:10px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--text-dark)}
+    .meta{color:var(--text-muted);font-size:14px}
+
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:18px}
+    @media (max-width:900px){.layout{grid-template-columns:1fr}}
+    .filters{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;position:sticky;top:140px}
+    @media (max-width:900px){ .filters{position:static} }
+    .facet{margin-bottom:14px}
+    .facet h4{margin:0 0 10px;font-size:16px;color:var(--text-muted)}
+    .option{display:flex;align-items:center;gap:8px;margin:6px 0}
+    input[type="checkbox"]{accent-color:var(--primary)}
+
+    .card-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .card{grid-column:span 12;background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    @media (min-width:640px){.card{grid-column:span 6}}
+    @media (min-width:960px){.card{grid-column:span 4}}
+    .media{aspect-ratio:16/9; overflow:hidden; border-bottom:1px solid var(--border)}
+    .media-img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s}
+    .card:hover .media-img{transform:scale(1.02)}
+    .content{padding:12px}
+    .title{margin:0 0 6px;font-weight:700;font-size:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .desc{margin:0 0 10px;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .badge{font-size:12px;padding:4px 8px;border-radius:999px;background:#fff;border:1px solid var(--border)}
+    .actions{display:flex;gap:10px;margin-top:auto;padding:10px 12px;border-top:1px solid var(--border)}
+    .btn{background:#fff;border:1px solid var(--border);border-radius:999px;cursor:pointer;color:var(--text-dark);padding:8px 14px}
+    .btn.small{padding:6px 12px}
+    .btn.primary{background:var(--primary);border:0;color:#fff}
+    .btn.primary:hover{background:var(--primary-hover)}
+    #empty{text-align:center;color:var(--text-muted);display:none}
+
+    
+    .rating{display:inline-flex;direction:ltr;gap:4px;cursor:pointer;font-size:18px}
+    .rating i{color:#ddd}
+    .rating i.active,
+    .rating i:hover,
+    .rating i:hover ~ i{color:var(--rating-yellow)}
+    .rating-value{font-size:13px;color:var(--text-muted);margin-inline-start:6px}
+
+    /* Drawer */
+    .scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:1090}
+    .scrim.show{opacity:1;pointer-events:auto}
+    .drawer{position:fixed; inset:0 0 0 auto; max-width:560px;height:calc(var(--vh) * 100);background:var(--bg-light); border-inline-start:1px solid var(--border);transform:translateX(100%); transition:.25s; display:flex; flex-direction:column;z-index:1100}
+    .drawer.show{transform:translateX(0)}
+    .drawer-head,.drawer-body,.drawer-actions{background:var(--bg-light)}
+    .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+    .drawer-body{padding:16px;overflow:auto}
+    .drawer-actions{padding:16px;border-top:1px solid var(--border)}
+    body.no-scroll{overflow:hidden}
+
+    footer.site-footer{background:#A48374; color:#fff; padding:50px 0 20px; margin-top:80px}
+    footer .quick a, footer .contact a{color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px}
+    footer h3{font-size:18px; margin-bottom:15px; border-bottom:2px solid #CBAD8D; display:inline-block; padding-bottom:5px}
+    footer .about p{font-size:14px; line-height:1.8; color:#f1ede6}
+    footer .copy{ text-align:center; margin-top:30px; font-size:13px; color:#f3eae2 }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">سِدا<span>پلتفرم</span></div>
+      <nav aria-label="مسیرهای سایت">
+        <ul>
+          <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+          <li><a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a></li>
+          <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+          <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+          <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-header"><i class="fa-solid fa-download"></i> دانلود اپ</a>
+      <button class="hamburger" id="hamburger" aria-label="باز و بسته کردن منو"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="home.html"><i class="fa-solid fa-house"></i> خانه</a>
+      <a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a>
+      <a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a>
+      <a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a>
+      <a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a>
+      <a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>کتابخانهٔ آموزشی</h1>
+      <p>ویدیوها، راهنماها، کوییزها و کتاب‌ها — نسخهٔ آنلاین.</p>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="container row">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-type="all">همه</button>
+        <button class="tab" data-type="video">ویدیو 🎥</button>
+        <button class="tab" data-type="guide">راهنما 📜</button>
+        <button class="tab" data-type="quiz2">کوییز ❓</button>
+        <button class="tab" data-type="book">کتاب 📘</button>
+      </div>
+      <div class="search">
+        <input id="q" class="input" placeholder="جستجو: عنوان، موضوع یا برنامه" aria-label="جستجو">
+      </div>
+      <div class="meta" id="meta" aria-live="polite">—</div>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <main class="container layout">
+    <aside class="filters">
+      <h3>فیلترها</h3>
+      <div class="facet">
+        <h4>موضوع</h4>
+        <label class="option"><input type="checkbox" value="phishing" class="f-topic"> فیشینگ</label>
+        <label class="option"><input type="checkbox" value="2fa" class="f-topic"> ۲FA</label>
+        <label class="option"><input type="checkbox" value="passwords" class="f-topic"> رمزها</label>
+        <label class="option"><input type="checkbox" value="privacy" class="f-topic"> حریم‌خصوصی</label>
+        <label class="option"><input type="checkbox" value="vpn" class="f-topic"> VPN</label>
+        <label class="option"><input type="checkbox" value="safe-browsing" class="f-topic"> مرور امن</label>
+        <label class="option"><input type="checkbox" value="mobile" class="f-topic"> ایمنی موبایل</label>
+        <label class="option"><input type="checkbox" value="data-protection" class="f-topic"> حفاظت داده</label>
+        <label class="option"><input type="checkbox" value="malware" class="f-topic"> بدافزار</label>
+        <label class="option"><input type="checkbox" value="emergency" class="f-topic"> اضطراری</label>
+      </div>
+
+      <div class="facet">
+        <h4>برنامه</h4>
+        <label class="option"><input type="checkbox" value="whatsapp" class="f-app"> واتس‌اپ</label>
+        <label class="option"><input type="checkbox" value="instagram" class="f-app"> اینستاگرام</label>
+        <label class="option"><input type="checkbox" value="telegram" class="f-app"> تلگرام</label>
+        <label class="option"><input type="checkbox" value="facebook" class="f-app"> فیس‌بوک</label>
+        <label class="option"><input type="checkbox" value="chrome" class="f-app"> کروم</label>
+      </div>
+    </aside>
+
+    <section>
+      <div class="card-grid" id="grid"></div>
+      <div id="empty" class="muted" style="margin-top:24px;display:none">
+        نتیجه‌ای یافت نشد.
+        <button id="clearFilters" class="btn small" style="margin-inline-start:8px">پاک‌کردن فیلترها</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Drawer -->
+  <div class="scrim" id="scrim" tabindex="-1" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <header class="drawer-head">
+      <h2 id="drawerTitle">—</h2>
+      <button class="btn" id="closeDrawer">بستن</button>
+    </header>
+    <div class="drawer-body" id="drawerBody">—</div>
+    <div class="drawer-actions">
+      <button class="btn primary" id="drawerPrimary">—</button>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+      <div class="about" style="flex:1; min-width:200px;">
+        <h3>درباره ما</h3>
+        <p>سِدا پلتفرم برای افزایش آگاهی زنان دربارهٔ امنیت دیجیتال ساخته شده است.</p>
+      </div>
+      <div class="quick" style="flex:1; min-width:200px;">
+        <h3>دسترسی سریع</h3>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+          <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+          <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+          <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+        </ul>
+      </div>
+      <div class="contact" style="flex:1; min-width:200px;">
+        <h3>ارتباط با ما</h3>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="mailto:info@sedaplatform.org"><i class="fa-solid fa-envelope"></i> ایمیل: info@sedaplatform.org</a></li>
+          <li><a href="#"><i class="fa-brands fa-telegram"></i> تلگرام: @SedaPlatform</a></li>
+          <li><a href="#"><i class="fa-brands fa-facebook"></i> فیس‌بوک: Seda Platform</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© ۲۰۲۵ سِدا پلتفرم – تمامی حقوق محفوظ است.</div>
+  </footer>
+
+  <script>
+    /* 100vh fix */
+    const setVH=()=>{ document.documentElement.style.setProperty('--vh',(window.innerHeight*0.01)+'px'); };
+    setVH(); window.addEventListener('resize', setVH);
+
+    /* hamburger */
+    const hamburger=document.getElementById('hamburger');
+    const mobileNav=document.getElementById('mobileNav');
+    hamburger.addEventListener('click',()=>{ const open=hamburger.classList.toggle('active'); mobileNav.classList.toggle('active',open); });
+
+    (function(){
+
+      const ITEMS = [
+        // VIDEO (1)
+        { id:'v-phishing', type:'video',
+          title:'شناسایی فیشینگ و پیام‌های مشکوک',
+          desc:'تشخیص لینک‌های جعلی، بررسی فرستنده و کارهایی که بعد از کلیک باید انجام شود.',
+          topic:['phishing'], app:['whatsapp','instagram','telegram'],
+          duration:'2:40',
+          img:'images/Phishing.jpg',
+          url:'https://youtu.be/XUAKAUohkCE?si=CJxF0t-LfEHekeBN'
+        },
+        // VIDEO (2)
+        { id:'v-2fa', type:'video',
+          title:'فعالسازی ۲FA و مدیر رمز',
+          desc:'۲FA روی واتس‌اپ/اینستاگرام/تلگرام + استفاده از Password Manager.',
+          topic:['2fa','passwords'], app:['whatsapp','instagram','telegram'],
+          duration:'3:00',
+          img:'images/FA.jpg',
+          url:'https://youtu.be/cVDANXlRIDw?si=5JD8NCuEBmkCTlkj'
+        },
+        // GUIDE
+        { id:'g-privacy', type:'guide',
+          title:'تنظیمات حریم خصوصی در شبکه‌های اجتماعی',
+          desc:'اینستاگرام، واتس‌اپ، تلگرام و فیس‌بوک—قدم‌به‌قدم.',
+          topic:['privacy'], app:['instagram','whatsapp','telegram','facebook'],
+          steps:6,
+          img:'images/media_privacy.jpg',
+          url:'guide-privacy (1).html'
+        },
+        // BOOK (1)
+        { id:'b-data', type:'book',
+          title:'کتابچهٔ حفاظت از داده‌های شخصی',
+          desc:'پوشهٔ قفل‌شده، رمزگذاری فایل‌ها، حذف متادیتای عکس، بک‌آپ امن.',
+          topic:['data-protection'], pages:48,
+          img:'content/images/data-protection.jpg',
+          url:'https://example.com/books/data-protection.pdf'
+        },
+        // VIDEO (3)
+        { id:'v-wifi', type:'video',
+          title:'وای‌فای عمومی امن + VPN',
+          desc:'چه زمانی از VPN استفاده کنیم؟',
+          topic:['vpn','safe-browsing'], app:['chrome'],
+          duration:'2:20',
+          img:'images/vpn11.jpg',
+          url:'https://youtu.be/HX2JtDm8-l0?si=-pLaJgIj-855qNTD'
+        },
+        // GUIDE
+        { id:'g-mobile', type:'guide',
+          title:'ایمنی موبایل: از مجوزها تا ضد استاکر‌ویر',
+          desc:'آپدیت، مجوز اپ‌ها، حذف اپ‌های مشکوک، قفل سیم‌کارت.',
+          topic:['mobile'], steps:5,
+          img:'images/privacy.jpg',
+          url:'guide-mobile (1).html'
+        },
+        // BOOK (2)
+        { id:'b-emergency', type:'book',
+          title:'کتابچهٔ اضطراری: وقتی هک شدیم چه کنیم؟',
+          desc:'چک‌لیست سریع: بستن نشست‌ها، تغییر رمزها، اطلاع به تماس امن، مستندسازی.',
+          topic:['emergency'], pages:36,
+          img:'content/images/emergency-toolkit.jpg',
+          url:'https://example.com/books/emergency-toolkit.pdf'
+        },
+        // VIDEO (4)
+        { id:'v-malware', type:'video',
+          title:'بدافزار و جاسوس‌افزار برای کاربران عادی',
+          desc:'علائم آلودگی و حذف امن.',
+          topic:['malware'], app:['chrome'],
+          duration:'2:10',
+          img:'images/Malwar.jpg',
+          url:'https://youtu.be/ZOncx-KD3IE?si=rzN34WgaWwdBbyFZ'
+        },
+        // QUIZ  (opens the quiz page)
+        { id:'q-password', type:'quiz2',
+          title:'کوییز: رمز قوی یا ضعیف؟',
+          desc:'۵ سناریو برای تشخیص رمز قوی.',
+          topic:['passwords'], questions:5,
+          img:'images/Quiz1.jpg',
+          url:'quiz2.html?id=q-password'  
+        }
+      ];
+
+      const PLACEHOLDER="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23CBAD8D'/%3E%3Cstop offset='1' stop-color='%23A48374'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E";
+
+      const RATE_KEY='seda_ratings';
+      const ratings = JSON.parse(localStorage.getItem(RATE_KEY) || '{}');
+
+      const state = { q:'', type:'all', topics:new Set(), apps:new Set() };
+      const grid=document.getElementById('grid'); const empty=document.getElementById('empty'); const meta=document.getElementById('meta');
+
+      const viewUrlOf = (it) => it.url || null;
+
+      function render(){
+        const res = ITEMS.filter(it=>{
+          if(state.type!=='all' && it.type!==state.type) return false;
+          for(const t of state.topics){ if(!it.topic?.includes(t)) return false; }
+          for(const a of state.apps){ if(!it.app?.includes(a)) return false; }
+          if(state.q){
+            const hay=[it.title,it.desc,...(it.topic||[]),...(it.app||[])].join(' ').toLowerCase();
+            if(!hay.includes(state.q.toLowerCase())) return false;
+          }
+          return true;
+        });
+        grid.innerHTML=''; empty.style.display=res.length?'none':'block'; meta.textContent=res.length+' مورد';
+        res.forEach(it=>grid.appendChild(card(it)));
+        initRatings();
+      }
+
+      function card(it){
+        const el=document.createElement('article'); el.className='card';
+        el.innerHTML = `
+          <div class="media">
+            <img class="media-img" src="${it.img||PLACEHOLDER}" alt="${escapeHTML(it.title)}" loading="lazy">
+          </div>
+          <div class="content">
+            <h3 class="title" title="${escapeHTML(it.title)}">${escapeHTML(it.title)}</h3>
+            <p class="desc">${escapeHTML(it.desc)}</p>
+            <div class="meta-row">
+              ${it.duration?`<span class="badge">⏱ ${it.duration}</span>`:''}
+              ${it.steps?`<span class="badge">🪜 ${it.steps} گام</span>`:''}
+              ${it.pages?`<span class="badge">📖 ${it.pages} صفحه</span>`:''}
+              ${it.questions?`<span class="badge">❓ ${it.questions} سوال</span>`:''}
+              ${it.topic?.map(t=>`<span class="badge">#${topicLabel(t)}</span>`).join('')||''}
+              ${it.app?.map(a=>`<span class="badge">${appLabel(a)}</span>`).join('')||''}
+            </div>
+            <div class="rating" data-id="${it.id}" aria-label="امتیازدهی">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span class="rating-value"></span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn small primary" data-act="open">${primaryCta(it.type)}</button>
+          </div>`;
+        const viewUrl=viewUrlOf(it);
+        const open=()=> viewUrl ? window.open(viewUrl,'_blank','noopener') : openDrawer(it);
+        el.querySelector('.media-img').addEventListener('click',open);
+        el.querySelector('.title').addEventListener('click',open);
+        el.querySelector('[data-act="open"]').addEventListener('click',open);
+        return el;
+      }
+
+      // Drawer (fallback preview)
+      const scrim=document.getElementById('scrim'); const drawer=document.getElementById('drawer');
+      const dTitle=document.getElementById('drawerTitle'); const dBody=document.getElementById('drawerBody'); const dPri=document.getElementById('drawerPrimary');
+      let lastFocus=null;
+
+      function openDrawer(it){
+        lastFocus=document.activeElement;
+        dTitle.textContent=it.title;
+        dBody.innerHTML=`
+          <p class="muted" style="margin-top:0">${escapeHTML(it.desc)}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0">
+            ${it.duration?`<span class="badge">⏱ ${it.duration}</span>`:''}
+            ${it.steps?`<span class="badge">🪜 ${it.steps} گام</span>`:''}
+            ${it.pages?`<span class="badge">📖 ${it.pages} صفحه</span>`:''}
+            ${it.questions?`<span class="badge">❓ ${it.questions} سوال</span>`:''}
+          </div>`;
+        const v=viewUrlOf(it);
+        dPri.textContent=primaryCta(it.type);
+        if(v){ dPri.disabled=false; dPri.onclick=()=>window.open(v,'_blank','noopener'); }
+        else { dPri.disabled=true; dPri.onclick=null; dPri.textContent='به‌زودی'; }
+        document.body.classList.add('no-scroll'); scrim.classList.add('show'); drawer.classList.add('show'); dPri.focus();
+      }
+      function closeDrawer(){ document.body.classList.remove('no-scroll'); scrim.classList.remove('show'); drawer.classList.remove('show'); if(lastFocus) lastFocus.focus(); }
+      document.getElementById('closeDrawer').addEventListener('click',closeDrawer);
+      scrim.addEventListener('click',closeDrawer);
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+      // Filters / Search / Tabs
+      const qEl=document.getElementById('q');
+      qEl.addEventListener('input',debounce(e=>{ state.q=e.target.value.trim(); render(); },200));
+      document.querySelectorAll('.f-topic').forEach(cb=>cb.addEventListener('change',e=>{ toggleSet(state.topics,e.target.value,e.target.checked); render(); }));
+      document.querySelectorAll('.f-app').forEach(cb=>cb.addEventListener('change',e=>{ toggleSet(state.apps,e.target.value,e.target.checked); render(); }));
+      document.getElementById('tabs').addEventListener('click',e=>{
+        const t=e.target.closest('.tab'); if(!t) return;
+        document.querySelectorAll('#tabs .tab').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active'); state.type=t.dataset.type; render();
+      });
+      document.getElementById('clearFilters').addEventListener('click',()=>{
+        state.q=''; state.type='all'; state.topics.clear(); state.apps.clear();
+        document.querySelectorAll('.f-topic,.f-app').forEach(cb=>cb.checked=false); qEl.value=''; render();
+      });
+
+      // Ratings (local only)
+      function initRatings(){ document.querySelectorAll('.rating').forEach(r=>{ const id=r.dataset.id; const stars=r.querySelectorAll('i'); const val=r.querySelector('.rating-value'); let v=ratings[id]||0; updateStars(stars,v); val.textContent=v?`(${Number(v).toFixed(1)})`:''; stars.forEach((s,i)=>{ s.addEventListener('click',()=>{ v=i+1; ratings[id]=v; localStorage.setItem('seda_ratings',JSON.stringify(ratings)); updateStars(stars,v); val.textContent=`(${Number(v).toFixed(1)})`; }); }); }); }
+      function updateStars(stars,val){ stars.forEach((s,i)=>s.classList.toggle('active',i<val)); }
+
+      // Helpers
+      function primaryCta(t){ return t==='video'?'تماشا' : t==='guide'?'مشاهدهٔ راهنما' : t==='book'?'مطالعهٔ کتاب' : 'شروع کوییز'; }
+      function topicLabel(k){ return ({'2fa':'۲FA','passwords':'رمزها','phishing':'فیشینگ','privacy':'حریم‌خصوصی','vpn':'VPN','safe-browsing':'مرور امن','mobile':'ایمنی موبایل','data-protection':'حفاظت داده','malware':'بدافزار','emergency':'اضطراری'})[k]||k; }
+      function appLabel(k){ return ({whatsapp:'واتس‌اپ',instagram:'اینستاگرام',telegram:'تلگرام',facebook:'فیس‌بوک',chrome:'کروم'})[k]||k; }
+      function toggleSet(set,v,on){ if(on) set.add(v); else set.delete(v); }
+      function debounce(fn,ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms);} }
+      function escapeHTML(s){ return (s+'').replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

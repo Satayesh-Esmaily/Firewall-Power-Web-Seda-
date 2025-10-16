@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>سِدا پلتفرم | آزمون</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root{
+      /* brand */
+      --primary:#A48374;
+      --primary-hover:#8C6B5F;
+      --secondary:#CBAD8D;
+      --text-dark:#3A2D28;
+      --text-muted:#A48374;
+      --bg-light:#F1EDE6;
+      --bg-section:#EBE3DB;
+
+      /* surfaces */
+      --surface:#FFFFFF;
+      --border:#D1C7BD;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(58,45,40,.10);
+
+      /* sizing */
+      --max-width:900px;
+      --vh: 1vh;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Vazirmatn",sans-serif;
+      background:var(--bg-light);
+      color:var(--text-dark);
+      line-height:1.8;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 18px}
+    @media (max-width:480px){ .container{padding:0 14px} }
+
+    /* header — same vibe as home */
+    header{
+      position:sticky; top:0; z-index:10;
+      background:var(--bg-light);
+      border-bottom:1px solid #ddd;
+    }
+    .header-inner{
+      height:64px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo{font-weight:700} .logo span{color:var(--primary)}
+    .btn{
+      background:#fff; border:1px solid var(--border); color:var(--text-dark);
+      padding:8px 14px; border-radius:999px; cursor:pointer;
+    }
+    .btn.primary{background:var(--primary); color:#fff; border:0}
+    .btn.primary:hover{background:var(--primary-hover)}
+
+    /* hero */
+    .hero{background:var(--bg-section); padding:28px 0; border-bottom:1px solid var(--border)}
+    .hero h1{font-size:clamp(20px,4vw,26px); margin-bottom:6px}
+    .hero p{color:var(--text-muted); font-size:15px}
+
+    /* progress */
+    .progress{
+      display:flex; align-items:center; gap:10px;
+      background:#fff; border:1px solid var(--border);
+      padding:10px; border-radius:999px; margin:16px 0;
+    }
+    .bar{
+      flex:1; height:10px; border-radius:999px;
+      background:#eee; overflow:hidden; border:1px solid var(--border);
+    }
+    .bar > span{
+      display:block; height:100%; width:0%;
+      background:linear-gradient(90deg, var(--secondary), var(--primary));
+      transition:width .25s ease;
+    }
+    .progress small{color:var(--text-muted)}
+
+    /* cards */
+    .card{
+      background:#fff; border:1px solid var(--border);
+      border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:16px; margin:14px 0;
+    }
+    .q-head{
+      display:flex; align-items:center; gap:10px; margin-bottom:10px;
+    }
+    .q-num{
+      background:var(--primary); color:#fff; font-weight:700;
+      min-width:34px; height:34px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 10px rgba(164,131,116,.25);
+    }
+    .q-title{font-weight:700}
+
+    /* option as pill */
+    .opt{
+      display:flex; gap:10px; align-items:center;
+      border:1px solid var(--border);
+      background:#fff; padding:10px 12px; border-radius:12px;
+      margin:8px 0; cursor:pointer; transition:all .2s ease;
+    }
+    .opt:hover{box-shadow:0 6px 14px rgba(0,0,0,.06); transform:translateY(-1px)}
+    .opt input{accent-color:var(--primary); transform:scale(1.25)}
+    .opt.correct{border-color:#2e7d32; background:#edf7ee}
+    .opt.wrong{border-color:#b00020; background:#fdecec}
+
+    .meta{color:var(--text-muted); font-size:14px}
+
+    /* sticky submit bar */
+    .submitbar{
+      position:sticky; bottom:0; z-index:5;
+      backdrop-filter: blur(6px);
+      background:color-mix(in oklab, var(--bg-light) 88%, #fff);
+      border-top:1px solid var(--border);
+      padding:10px 0;
+      margin-top:8px;
+    }
+    .submitbar-inner{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+    }
+
+    /* result box */
+    .result{
+      background:var(--bg-section); border:1px solid var(--border);
+      border-radius:var(--radius); padding:14px; margin-top:16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">سِدا<span>پلتفرم</span></div>
+      <nav>
+        <a class="btn" href="library.html"><i class="fa-solid fa-arrow-right"></i> بازگشت به کتابخانه</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 id="title">آزمون</h1>
+      <p id="desc">—</p>
+      <div class="progress" aria-label="پیشرفت">
+        <div class="bar"><span id="bar"></span></div>
+        <small id="progTxt">۰/۰ پاسخ داده‌شده</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz -->
+  <main class="container" style="padding:18px 0 80px">
+    <form id="quizForm" novalidate></form>
+
+    <div class="submitbar">
+      <div class="container submitbar-inner">
+        <div class="meta" id="tip">لطفاً به همهٔ سوال‌ها پاسخ دهید.</div>
+        <div style="display:flex; gap:8px">
+          <button id="retryBtn" class="btn" type="button" style="display:none">شروع دوباره</button>
+          <button id="submitBtn" class="btn primary" type="submit"><i class="fa-solid fa-check"></i> ثبت پاسخ‌ها</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="result" class="result" style="display:none"></div>
+  </main>
+
+  <script>
+    /* mobile 100vh fix */
+    const setVH=()=>{ document.documentElement.style.setProperty('--vh',(window.innerHeight*0.01)+'px'); };
+    setVH(); addEventListener('resize', setVH);
+
+    // ---------- QUIZ DATA (add more ids as needed) ----------
+    const QUIZZES = {
+      'q-password': {
+        title: 'کوییز: رمز قوی یا ضعیف؟',
+        desc: '۵ سوال کوتاه دربارهٔ ساخت و تشخیص رمزهای امن.',
+        questions: [
+          {
+            q: 'کدام رمز امن‌تر است؟',
+            a: ['Summer2024','Mina!Door+Tree_58@','123456','qwerty'],
+            correct: 1,
+            explain: 'ترکیب طول مناسب + حروف کوچک/بزرگ + نماد و عدد بهتر است.'
+          },
+          {
+            q: 'تبدیل حرف «a» به «@» همیشه کافی است؟',
+            a: ['بله، همیشه','خیر، الگوی قابل حدس است','فقط در فیسبوک'],
+            correct: 1,
+            explain: 'الگوهای رایج مثل a→@ حدس‌زدنی‌اند؛ طول و تصادفی‌بودن مهم‌تر است.'
+          },
+          {
+            q: 'استفاده از یک رمز واحد برای چند حساب…',
+            a: ['راحت و امن','اشکالی ندارد','خطرناک است'],
+            correct: 2,
+            explain: 'نشت یک سرویس = دسترسی به همهٔ حساب‌های شما.'
+          },
+          {
+            q: 'بهترین روش نگهداری رمزها؟',
+            a: ['یادسپاری ذهنی','نوت در گالری','مدیر رمز (Password Manager)'],
+            correct: 2,
+            explain: 'مدیر رمز، رمزهای قوی تولید و به‌صورت امن ذخیره می‌کند.'
+          },
+          {
+            q: '۲FA به چه معناست؟',
+            a: ['رمز طولانی','احراز هویت دومرحله‌ای','اینترنت امن'],
+            correct: 1,
+            explain: 'کد دومرحله‌ای با اپ، پیامک یا کلید امنیتی.'
+          }
+        ]
+      }
+    };
+
+    // ---------- helpers ----------
+    const $ = (s, root=document)=>root.querySelector(s);
+    function getParam(name){ return new URLSearchParams(location.search).get(name); }
+    function toPersian(n){ return n.toString().replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[+d]); }
+
+    // ---------- load quiz ----------
+    const id = getParam('id');
+    const quiz = QUIZZES[id];
+
+    const form = $('#quizForm');
+    const titleEl = $('#title');
+    const descEl = $('#desc');
+    const barEl = $('#bar');
+    const progTxt = $('#progTxt');
+    const tip = $('#tip');
+    const submitBtn = $('#submitBtn');
+    const retryBtn = $('#retryBtn');
+    const result = $('#result');
+
+    if(!quiz){
+      titleEl.textContent = 'آزمون یافت نشد';
+      descEl.textContent = 'لینک آزمون معتبر نیست.';
+      submitBtn.disabled = true;
+    } else {
+      titleEl.textContent = quiz.title;
+      descEl.textContent = quiz.desc;
+
+      quiz.questions.forEach((item, idx)=>{
+        const fs = document.createElement('fieldset');
+        fs.className = 'card';
+        fs.innerHTML = `
+          <div class="q-head">
+            <div class="q-num">${toPersian(idx+1)}</div>
+            <div class="q-title">سوال ${toPersian(idx+1)}: ${item.q}</div>
+          </div>
+          <div class="opts">
+            ${item.a.map((opt,i)=>`
+              <label class="opt" data-idx="${idx}" data-val="${i}">
+                <input type="radio" name="q${idx}" value="${i}">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="meta" id="exp-${idx}" style="display:none"></div>
+        `;
+        form.appendChild(fs);
+      });
+
+      // update progress
+      const total = quiz.questions.length;
+      const updateProgress = ()=>{
+        const answered = [...form.querySelectorAll('input[type="radio"]:checked')].length;
+        const p = Math.round(100*answered/total);
+        barEl.style.width = p+'%';
+        progTxt.textContent = `${toPersian(answered)}/${toPersian(total)} پاسخ داده‌شده`;
+        tip.textContent = answered===total ? 'آمادهٔ ثبت پاسخ‌ها.' : 'لطفاً به همهٔ سوال‌ها پاسخ دهید.';
+      };
+      form.addEventListener('change', e=>{
+        // make whole row selectable
+        if(e.target.matches('.opt')) {
+          const radio = e.target.querySelector('input[type="radio"]');
+          radio.checked = true;
+        }
+        updateProgress();
+      });
+      updateProgress();
+
+      // submit
+      form.addEventListener('submit', e=>e.preventDefault());
+      submitBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        // check all answered
+        const allAnswered = quiz.questions.every((_,i)=>form.querySelector(`input[name="q${i}"]:checked`));
+        if(!allAnswered){
+          tip.textContent = 'هنوز به همهٔ سوال‌ها پاسخ نداده‌اید.';
+          return;
+        }
+
+        let correct = 0;
+        quiz.questions.forEach((item, idx)=>{
+          const chosen = form.querySelector(`input[name="q${idx}"]:checked`);
+          const row = chosen?.closest('.opt');
+          const all = form.querySelectorAll(`label.opt[data-idx="${idx}"]`);
+          all.forEach(l=>l.classList.remove('correct','wrong'));
+          const ok = Number(chosen.value) === item.correct;
+          if(ok){ correct++; if(row) row.classList.add('correct'); }
+          else { if(row) row.classList.add('wrong'); }
+          const exp = $(`#exp-${idx}`);
+          exp.style.display = 'block';
+          exp.style.color = ok ? '#2e7d32' : '#b00020';
+          exp.textContent = (ok ? 'درست: ' : 'نادرست: ') + (item.explain || '');
+        });
+
+        const percent = Math.round((correct/quiz.questions.length)*100);
+        result.style.display = 'block';
+        result.innerHTML = `
+          <strong>نتیجه:</strong> ${toPersian(correct)} از ${toPersian(quiz.questions.length)} — ${toPersian(percent)}%
+          <div class="meta" style="margin-top:4px">آفرین! برای تقویت بیشتر، توضیحات هر سوال را مرور کنید.</div>
+        `;
+        retryBtn.style.display = 'inline-block';
+        window.scrollTo({ top: result.offsetTop - 80, behavior: 'smooth' });
+      });
+
+      retryBtn.addEventListener('click', ()=>{
+        [...form.querySelectorAll('input[type="radio"]')].forEach(i=>i.checked=false);
+        [...form.querySelectorAll('label.opt')].forEach(l=>l.classList.remove('correct','wrong'));
+        [...form.querySelectorAll('.meta[id^="exp-"]')].forEach(e=>{ e.style.display='none'; e.textContent=''; });
+        result.style.display='none';
+        retryBtn.style.display='none';
+        tip.textContent='لطفاً به همهٔ سوال‌ها پاسخ دهید.';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // progress reset
+        const total = quiz.questions.length;
+        const answered = 0;
+        barEl.style.width = '0%';
+        progTxt.textContent = `${toPersian(answered)}/${toPersian(total)} پاسخ داده‌شده`;
+      });
+    }
+  </script>
+</body>
+</html>
