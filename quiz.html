@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سِدا پلتفرم</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #A48374;
+      --primary-hover: #8C6B5F;
+      --secondary: #CBAD8D;
+      --text-dark: #3A2D28;
+      --text-muted: #A48374;
+      --bg-light: #F1EDE6;
+      --bg-section: #EBE3DB;
+      --max-width: 1100px;
+      --correct: #4CAF50;
+      --wrong: #e74c3c;
+    }
+
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: "Vazirmatn", sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.8;}
+    a {text-decoration:none; color:inherit;}
+    .container {max-width: var(--max-width); margin:0 auto; padding:0 20px;}
+
+    header {background: var(--bg-light); border-bottom: 1px solid #ddd; position: sticky; top:0; z-index:100;}
+    .header-inner {display:flex; align-items:center; justify-content:space-between; height:70px;}
+    .logo {font-weight:700; font-size:20px; color: var(--text-dark);}
+    .logo span {color: var(--primary);}
+    nav ul {display:flex; list-style:none; gap:30px;}
+    nav ul li a {display:flex; align-items:center; gap:8px; font-weight:500; transition: color 0.3s;}
+    nav ul li a i {color: var(--primary); font-size:16px;}
+    nav ul li a:hover {color: var(--primary);}
+    .btn-header {background: var(--primary); color:#fff; padding:8px 16px; border-radius:6px; font-weight:600; transition:0.3s; display:flex; align-items:center; gap:6px;}
+    .btn-header:hover {background: var(--primary-hover);}
+    .hamburger {display:none; flex-direction:column; justify-content:center; cursor:pointer; width:28px; height:22px; gap:5px; transition:0.3s;}
+    .hamburger span {background: var(--text-dark); height:3px; border-radius:2px; width:100%; transition:0.3s ease;}
+    .mobile-nav {display:none; background: var(--bg-light); border-top:1px solid #ddd; text-align:center; flex-direction:column; gap:15px; padding:15px 0; box-shadow:0 6px 15px rgba(0,0,0,0.1); opacity:0; transform:translateY(-10px); transition:all 0.4s ease; position:relative; z-index:90;}
+    .mobile-nav a {display:flex; justify-content:center; align-items:center; gap:8px; font-weight:500; color: var(--text-dark); transition: color 0.3s;}
+    .mobile-nav a i {color: var(--primary);}
+    .mobile-nav a:hover {color: var(--primary);}
+    .mobile-nav.active {display:flex; opacity:1; transform:translateY(0);}
+    .hamburger.active span:nth-child(1) {transform: rotate(45deg) translateY(8px);}
+    .hamburger.active span:nth-child(2) {opacity:0;}
+    .hamburger.active span:nth-child(3) {transform: rotate(-45deg) translateY(-8px);}
+    @media(max-width:900px){nav ul{display:none;} .btn-header{display:none;} .hamburger{display:flex;}}
+
+    .quiz-container {display:flex; justify-content:center; padding:60px 20px;}
+    .quiz-box {background:var(--bg-section); padding:25px; border-radius:15px; width:400px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+    .quiz-box h2 {font-size:20px; margin-bottom:20px; color:var(--primary);}
+    .option {background:#D1C7BD; padding:10px; margin:10px 0; border-radius:10px; cursor:pointer; transition:0.3s; font-size:15px;}
+    .option:hover {background:var(--secondary); color:#fff;}
+    .correct {background: var(--correct) !important; color:#fff !important;}
+    .wrong {background: var(--wrong) !important; color:#fff !important;}
+    .next-btn, .level-btn {background: var(--primary); color:#fff; border:none; padding:10px 20px; margin-top:15px; border-radius:8px; font-size:14px; cursor:pointer; transition:0.3s; font-weight:600;}
+    .next-btn:hover, .level-btn:hover {background: var(--primary-hover);}
+
+    footer {background: var(--primary); color:#fff; padding:50px 0 20px; margin-top:80px;}
+    .footer-container {display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px; max-width: var(--max-width); margin:0 auto; padding:0 20px;}
+    .footer-col {flex:1; min-width:200px;}
+    .footer-col h3 {font-size:18px; margin-bottom:15px; color:#fff; border-bottom:2px solid var(--secondary); display:inline-block; padding-bottom:5px;}
+    .footer-col ul {list-style:none;}
+    .footer-col ul li {margin:8px 0;}
+    .footer-col ul li a {color:#f1ede6; font-size:14px; transition:color 0.3s; display:flex; align-items:center; gap:6px;}
+    .footer-col ul li a i {color:#f1ede6; font-size:14px;}
+    .footer-col ul li a:hover {color: var(--secondary);}
+    .footer-bottom {text-align:center; margin-top:30px; font-size:13px; color:#f3eae2;}
+
+  /* Chatbot Floating Button */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+#chatbot-button {
+  width: 60px;
+  height: 60px;
+  background: #A48374;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+#chatbot-button:hover {
+  background: #8C6B5F;
+}
+
+/* Chatbot Window */
+#chatbot-window {
+  width: 320px;
+  height: 420px;
+  background: #F1EDE6;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+#chatbot-header {
+  background: #A48374;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Messages area */
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: calc(100% - 90px); /* جلوگیری از بیرون‌زدن محتوا */
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Input area */
+#chatbot-input-container {
+  display: flex;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+#chatbot-send {
+  padding: 8px 12px;
+  background: #A48374;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#chatbot-send:hover {
+  background: #8C6B5F;
+}
+
+/* پیام‌ها */
+.message {
+  display: flex;
+  margin: 6px 0;
+}
+
+.message .avatar {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+
+.message.user .avatar {
+  background: #A48374;
+  color: #fff;
+}
+
+.message.bot .avatar {
+  background: #ccc;
+  color: #333;
+}
+
+.message-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: #DCC7BD;
+  align-self: flex-end;
+}
+
+  
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">سِدا<span>پلتفرم</span></div>
+    <nav>
+        <ul>
+          <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+          <li><a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a></li>
+          <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+          <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+          <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a></li>
+        </ul>
+    </nav>
+    <a href="#" class="btn-header"><i class="fa-solid fa-download"></i> دانلود اپ</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="home.html"><i class="fa-solid fa-house"></i> خانه</a>
+      <a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a>
+      <a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a>
+      <a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a>
+      <a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a>
+      <a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a>
+    </div>
+</header>
+
+<div class="quiz-container">
+  <div class="quiz-box" id="quiz">
+    <h2>سطح مورد نظر را انتخاب کنید:</h2>
+    <button class="level-btn" onclick="startQuiz('beginner')">ابتدایی</button>
+    <button class="level-btn" onclick="startQuiz('intermediate')">متوسط</button>
+    <button class="level-btn" onclick="startQuiz('advanced')">عالی</button>
+  </div>
+</div>
+  <!-- Chatbot Button -->
+<div id="chatbot-container">
+  <div id="chatbot-button">
+    <i class="fa-solid fa-robot" style="font-size:24px;"></i>
+  </div>
+
+  <div id="chatbot-window">
+    <div id="chatbot-header">
+      <span>چت بات سِدا</span>
+      <span id="chatbot-close" style="cursor:pointer;">&#10005;</span>
+    </div>
+    <div id="chatbot-messages">
+      <p>سلام! من چت بات سِدا هستم. می‌توانم به شما در امنیت دیجیتال کمک کنم 😊</p>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="پیام خود را تایپ کنید..." />
+      <button id="chatbot-send">ارسال</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>درباره ما</h3>
+      <p style="font-size:14px; color:#f1ede6; line-height:1.8;">سِدا پلتفرم با هدف افزایش آگاهی زنان در زمینه امنیت دیجیتال طراحی شده است تا آنان بتوانند با اطمینان و آگاهی در فضای مجازی حضور داشته باشند.</p>
+    </div>
+    <div class="footer-col">
+      <h3>دسترسی سریع</h3>
+      <ul>
+        <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+        <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+        <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+        <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>ارتباط با ما</h3>
+      <ul>
+        <li><a href="#"><i class="fa-solid fa-envelope"></i> ایمیل: info@sedaplatform.org</a></li>
+        <li><a href="#"><i class="fa-brands fa-telegram"></i> تلگرام: @SedaPlatform</a></li>
+        <li><a href="#"><i class="fa-brands fa-facebook"></i> فیس‌بوک: Seda Platform</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© ۲۰۲۵ سِدا پلتفرم – تمامی حقوق محفوظ است.</div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', ()=>{hamburger.classList.toggle('active'); mobileNav.classList.toggle('active');});
+
+// Quiz JS will go here
+let currentQuestion = 0;
+let score = 0;
+let currentQuiz = [];
+
+const quizData = {
+  beginner: [
+    {question: "رمز عبور قوی باید چگونه باشد؟", options:["شامل حروف، اعداد و نمادها باشد","فقط نام کاربر باشد","فقط عدد باشد","خیلی ساده و کوتاه باشد"], answer:0},
+    {question: "پیامی مشکوک دریافت کردی، چه کار کنی؟", options:["بازش کن","به دوستت بفرست","نادیده بگیر و گزارش بده","روی لینک کلیک کن"], answer:2},
+    {question: "اطلاعات شخصی در شبکه‌های اجتماعی باید چگونه باشد؟", options:["عمومی نکنیم","آدرس دقیق پست کنیم","رمز را شریک شویم","اکانت بدون امنیت بسازیم"], answer:0},
+    {question: "مرورگر امن کدام است؟", options:["Chrome","IE بدون افزونه","مرورگرهای با افزونه امنیتی","همه موارد"], answer:2},
+    {question: "برای جلوگیری از فیشینگ باید چه کرد؟", options:["روی لینک کلیک کنیم","اطلاعات را چک کنیم","هر ایمیلی را باز کنیم","بدون بررسی دانلود کنیم"], answer:1},
+    {question: "پیام های خصوصی را چگونه نگه داریم؟", options:["رمزگذاری کنیم","بدون رمز بگذاریم","در کانال عمومی پست کنیم","با دیگران به اشتراک بگذاریم"], answer:0},
+    {question: "چه اقداماتی برای امنیت تلگرام لازم است؟", options:["تنظیمات حریم خصوصی","همه به صورت عمومی","اشتراک رمزها","فعال نکردن تایید دومرحله‌ای"], answer:0},
+    {question: "واتساپ چگونه امن می‌شود؟", options:["فعال کردن تایید دو مرحله‌ای","هیچ کاری نکنیم","رمز ساده استفاده کنیم","اکانت عمومی بسازیم"], answer:0},
+    {question: "داده‌های حساس چگونه محافظت شوند؟", options:["در دستگاه خود نگه داریم","به دیگران بدهیم","در فضای عمومی پست کنیم","رمزگذاری نکنیم"], answer:0},
+    {question: "شناسایی حملات مشکوک چه اهمیتی دارد؟", options:["خیلی مهم است","بی اهمیت است","صرفاً برای تفریح","غیرضروری"], answer:0}
+  ],
+  intermediate: [
+    {question: "چگونه رمز عبور را قوی کنیم؟", options:["ترکیبی از حروف و اعداد","فقط حروف","فقط اعداد","کوتاه و ساده"], answer:0},
+    {question: "مرورگر امن چه ویژگی دارد؟", options:["افزونه امنیتی","بدون افزونه","همه مرورگرها","هیچکدام"], answer:0},
+    {question: "چگونه ایمیل را امن کنیم؟", options:["رمزگذاری ایمیل","باز کردن همه","ارسال رمز به دیگران","نادیده گرفتن"], answer:0},
+    {question: "تنظیمات حریم خصوصی تلگرام چیست؟", options:["فقط مخاطبین","عمومی","هیچکدام","بدون رمز"], answer:0},
+    {question: "واتساپ چگونه از هک جلوگیری می‌کند؟", options:["فعال کردن تایید دو مرحله‌ای","رمز ساده","عمومی","اشتراک گذاری رمز"], answer:0},
+    {question: "چگونه داده‌های حساس محافظت شوند؟", options:["رمزگذاری","بدون امنیت","عمومی","ارسال به دیگران"], answer:0},
+    {question: "شناسایی فیشینگ چگونه است؟", options:["بررسی لینک و فرستنده","هر لینک را باز کنیم","اطلاعات را اشتراک بگذاریم","نادیده بگیریم"], answer:0},
+    {question: "رمز عبور طولانی چه فایده‌ای دارد؟", options:["امن‌تر است","بدتر است","هیچ تاثیری ندارد","ساده تر می‌شود"], answer:0},
+    {question: "پیام مشکوک چه کار کنیم؟", options:["گزارش بدهیم","باز کنیم","به دوست بفرستیم","روی لینک کلیک کنیم"], answer:0},
+    {question: "برای جلوگیری از فیشینگ چه باید کرد؟", options:["اطلاعات را بررسی کنیم","هر ایمیل را باز کنیم","روی لینک کلیک کنیم","دانلود کنیم"], answer:0}
+  ],
+  advanced: [
+    {question: "۷ راه برای ایمن نگه داشتن حساب‌های شبکه‌های اجتماعی چیست؟", options:["رمز قوی، تایید دو مرحله‌ای, حریم خصوصی, به‌روزرسانی‌ها, فیلتر پیام‌ها, نظارت فعالیت‌ها, حذف داده‌های قدیمی","همه عمومی کنیم","اشتراک رمزها","رمز ساده"], answer:0},
+    {question: "مرورگر امن چه ویژگی دارد؟", options:["افزونه امنیتی، HTTPS، بلاک تبلیغات","بدون افزونه","همه مرورگرها","هیچکدام"], answer:0},
+    {question: "چگونه ایمیل و پیام‌های خصوصی رمزگذاری کنیم؟", options:["استفاده از PGP یا Signal","بدون رمز","عمومی","ارسال به همه"], answer:0},
+    {question: "تلگرام را چگونه ایمن کنیم؟", options:["تایید دومرحله‌ای، محدود کردن مشاهده اطلاعات","همه عمومی","اشتراک رمزها","رمز ساده"], answer:0},
+    {question: "واتساپ و سایر پیام‌رسان‌ها را چگونه امن کنیم؟", options:["فعال کردن تایید دو مرحله‌ای و تنظیمات حریم خصوصی","بدون امنیت","رمز ساده","همه عمومی"], answer:0},
+    {question: "چگونه داده‌های شخصی و اطلاعات حساس را محافظت کنیم؟", options:["رمزگذاری و نگهداری امن","اشتراک گذاری","ارسال عمومی","نادیده گرفتن"], answer:0},
+    {question: "چگونه فیشینگ و حملات مشکوک را شناسایی کنیم؟", options:["بررسی لینک، فرستنده و محتوا","باز کردن هر لینک","نادیده گرفتن","اشتراک گذاری اطلاعات"], answer:0},
+    {question: "تایید دومرحله‌ای چه کمکی می‌کند؟", options:["امنیت حساب را افزایش می‌دهد","بی اهمیت است","پیام‌ها را حذف می‌کند","هیچ فایده‌ای ندارد"], answer:0},
+    {question: "افزونه امنیتی مرورگر چه کاری انجام می‌دهد؟", options:["مسدود کردن سایت‌های مخرب و ردیاب‌ها","هیچ کاری نمی‌کند","رمزها را به اشتراک می‌گذارد","اطلاعات عمومی می‌کند"], answer:0},
+    {question: "چرا داده‌های قدیمی شبکه‌های اجتماعی را حذف کنیم؟", options:["کاهش ریسک لو رفتن اطلاعات","هیچ دلیلی ندارد","فقط برای سرگرمی","برنامه مرورگر را سریع می‌کند"], answer:0}
+  ]
+};
+
+function startQuiz(level) {
+  currentQuiz = quizData[level];
+  currentQuestion = 0;
+  score = 0;
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const quizBox = document.getElementById('quiz');
+  const q = currentQuiz[currentQuestion];
+  quizBox.innerHTML = `<h2>${q.question}</h2>` +
+    q.options.map((opt,i)=>`<div class="option" onclick="checkAnswer(this, ${i})">${opt}</div>`).join('') +
+    `<button class="next-btn" onclick="nextQuestion()">سؤال بعدی</button>`;
+}
+
+function checkAnswer(element, selected) {
+  const q = currentQuiz[currentQuestion];
+  const options = document.querySelectorAll('.option');
+  options.forEach(opt => opt.style.pointerEvents = 'none');
+  if(selected === q.answer) {
+    element.classList.add('correct');
+    score++;
+    alert('✅ درست گفتی! 🎉');
+  } else {
+    element.classList.add('wrong');
+    alert('❌ پاسخ اشتباه است!');
+  }
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if(currentQuestion < currentQuiz.length) {
+    loadQuestion();
+  } else {
+    const quizBox = document.getElementById('quiz');
+    quizBox.innerHTML = `<h2>🎉 تبریک! شما آزمون را تمام کردید.</h2>
+                         <p>امتیاز شما: ${score} از ${currentQuiz.length}</p>`;
+    let levelMessage = '';
+    if(score <= currentQuiz.length/3) levelMessage = 'سطح یادگیری: ۱ تا ۳';
+    else if(score <= 2*currentQuiz.length/3) levelMessage = 'سطح یادگیری: ۴ تا ۷';
+    else levelMessage = 'سطح یادگیری: ۸ تا ۱۰';
+    quizBox.innerHTML += `<p>${levelMessage}</p>`;
+  }
+}
+
+</script>
+
+<script src="bot.js"></script>
+</body>
+</html>

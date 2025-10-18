@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سِدا پلتفرم</title>
+  <!-- فونت فارسی -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<!-- فونت فارسی وزیر یا شبنم برای ظاهر بهتر -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  /* --- Color Palette --- */
+:root {
+  --dark-brown: #3a2d28;
+  --soft-brown: #a48374;
+  --warm-beige: #cbad8d;
+  --light-nude: #f1ede6;
+  --cream: #ebe3db;
+  --white: #ffffff;
+}
+
+/* --- Global Reset --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(180deg, var(--light-nude), var(--cream));
+  color: var(--dark-brown);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+  background: linear-gradient(135deg, var(--dark-brown), var(--soft-brown));
+  color: var(--light-nude);
+  text-align: center;
+  padding: 100px 20px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0 10px 20px rgba(58, 45, 40, 0.2);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero h1 {
+  font-size: 2.8em;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* --- Main Sections --- */
+main {
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+/* --- Elegant Form Card --- */
+.form-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 8px 20px rgba(58, 45, 40, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeUp 1.2s ease;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(58, 45, 40, 0.15);
+}
+
+.form-card h2 {
+  text-align: center;
+  color: var(--soft-brown);
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* --- Form Styling --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--cream);
+  border-radius: 10px;
+  font-size: 1em;
+  background-color: var(--light-nude);
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--soft-brown);
+  outline: none;
+  background-color: var(--white);
+  box-shadow: 0 0 5px rgba(164, 131, 116, 0.4);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* --- Button --- */
+button {
+  background-color: var(--soft-brown);
+  color: var(--light-nude);
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--dark-brown);
+  transform: scale(1.03);
+}
+
+
+
+:root {
+  --primary: #A48374;
+  --primary-hover: #8C6B5F;
+  --secondary: #CBAD8D;
+  --text-dark: #3A2D28;
+  --text-muted: #A48374;
+  --bg-light: #F1EDE6;
+  --bg-section: #EBE3DB;
+  --max-width: 1100px;
+}
+
+/* --- Global Reset --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.8;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- HEADER --- */
+header {
+  background: var(--bg-light);
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text-dark);
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav ul li a i {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+nav ul li a:hover {
+  color: var(--primary);
+}
+
+.btn-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-header:hover {
+  background: var(--primary-hover);
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 28px;
+  height: 22px;
+  gap: 5px;
+  transition: all 0.3s;
+}
+
+.hamburger span {
+  background: var(--text-dark);
+  height: 3px;
+  border-radius: 2px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav {
+  display: none;
+  background: var(--bg-light);
+  border-top: 1px solid #ddd;
+  text-align: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 90;
+}
+
+.mobile-nav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: color 0.3s;
+}
+
+.mobile-nav a i {
+  color: var(--primary);
+}
+
+.mobile-nav a:hover {
+  color: var(--primary);
+}
+
+.mobile-nav.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* --- FOOTER --- */
+footer {
+  background: var(--primary);
+  color: #fff;
+  padding: 50px 0 20px;
+  margin-top: 80px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-col h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #fff;
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin: 8px 0;
+}
+
+.footer-col ul li a {
+  color: #f1ede6;
+  font-size: 14px;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-col ul li a i {
+  color: #f1ede6;
+  font-size: 14px;
+}
+
+.footer-col ul li a:hover {
+  color: var(--secondary);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #f3eae2;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  nav ul {
+    display: none;
+  }
+
+  .btn-header {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Chatbot Floating Button */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+#chatbot-button {
+  width: 60px;
+  height: 60px;
+  background: #A48374;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+#chatbot-button:hover {
+  background: #8C6B5F;
+}
+
+/* Chatbot Window */
+#chatbot-window {
+  width: 320px;
+  height: 420px;
+  background: #F1EDE6;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+#chatbot-header {
+  background: #A48374;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Messages area */
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: calc(100% - 90px); /* جلوگیری از بیرون‌زدن محتوا */
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Input area */
+#chatbot-input-container {
+  display: flex;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+#chatbot-send {
+  padding: 8px 12px;
+  background: #A48374;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#chatbot-send:hover {
+  background: #8C6B5F;
+}
+
+/* پیام‌ها */
+.message {
+  display: flex;
+  margin: 6px 0;
+}
+
+.message .avatar {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+
+.message.user .avatar {
+  background: #A48374;
+  color: #fff;
+}
+
+.message.bot .avatar {
+  background: #ccc;
+  color: #333;
+}
+
+.message-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: #DCC7BD;
+  align-self: flex-end;
+}
+
+
+</style>
+<body>
+
+   <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">سِدا<span>پلتفرم</span></div>
+      <nav>
+        <ul>
+          <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+          <li><a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a></li>
+          <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+          <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+          <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-header"><i class="fa-solid fa-download"></i> دانلود اپ</a>
+
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="home.html"><i class="fa-solid fa-house"></i> خانه</a>
+      <a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a>
+      <a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a>
+      <a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a>
+      <a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a>
+      <a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a>
+    </div>
+  </header>
+
+ <!-- Hero SECTION -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>به راهنمای پلتفرم ما خوش آمدید</h1>
+    <p>در اینجا می‌توانید با پلتفرم ما آشنا شوید، شکایات خود را ارسال کنید، پیشنهادات خود را به اشتراک بگذارید یا هر سوالی که دارید مطرح کنید. بازخورد شما به ما کمک می‌کند تا قوی‌تر شویم.</p>
+  </div>
+</section>
+
+
+   <!-- Main SECTION -->
+  <main>
+    <section class="form-card">
+      <h2>ارسال شکایات</h2>
+      <form id="complaintForm">
+        <div class="form-group">
+          <input type="text" placeholder="نام کامل" required>
+          <input type="email" placeholder="آدرس ایمیل"" required>
+        </div>
+        <input type="text" placeholder="موضوع" required>
+        <textarea placeholder="شکایت خود را اینجا بنویسید...." required></textarea>
+        <button type="submit">ارسال شکایت</button>
+      </form>
+    </section>
+
+    <section class="form-card">
+      <h2>پرسیدن سوال یا نظرات و بازخوردها</h2>
+      <form id="suggestionForm">
+        <div class="form-group">
+          <input type="text" placeholder="نام کامل" required>
+          <input type="email" placeholder="آدرس ایمیل" required>
+        </div>
+        <select required>
+          <option value="">نوع پیام خود را انتخاب کنید</option>
+          <option value="Question">سوال</option>
+          <option value="Suggestion">پیشنهاد</option>
+          <option value="Feedback">بازخورد</option>
+        </select>
+        <textarea placeholder="نوشتن پیام....." required></textarea>
+        <button type="submit">ارسال پیام</button>
+      </form>
+    </section>
+
+  </main>
+
+    <!-- Chatbot Button -->
+<div id="chatbot-container">
+  <div id="chatbot-button">
+    <i class="fa-solid fa-robot" style="font-size:24px;"></i>
+  </div>
+
+  <div id="chatbot-window">
+    <div id="chatbot-header">
+      <span>چت بات سِدا</span>
+      <span id="chatbot-close" style="cursor:pointer;">&#10005;</span>
+    </div>
+    <div id="chatbot-messages">
+      <p>سلام! من چت بات سِدا هستم. می‌توانم به شما در امنیت دیجیتال کمک کنم 😊</p>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="پیام خود را تایپ کنید..." />
+      <button id="chatbot-send">ارسال</button>
+    </div>
+  </div>
+</div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>درباره ما</h3>
+        <p style="font-size:14px; color:#f1ede6; line-height:1.8;">
+          سِدا پلتفرم با هدف افزایش آگاهی زنان در زمینه امنیت دیجیتال طراحی شده است تا آنان بتوانند با اطمینان و آگاهی در فضای مجازی حضور داشته باشند.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3>دسترسی سریع</h3>
+      <ul>
+        <li><a href="home.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+        <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+        <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+        <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+      </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>ارتباط با ما</h3>
+        <ul>
+          <li><a href="#"><i class="fa-solid fa-envelope"></i> ایمیل: info@sedaplatform.org</a></li>
+          <li><a href="#"><i class="fa-brands fa-telegram"></i> تلگرام: @SedaPlatform</a></li>
+          <li><a href="#"><i class="fa-brands fa-facebook"></i> فیس‌بوک: Seda Platform</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © ۲۰۲۵ سِدا پلتفرم – تمامی حقوق محفوظ است.
+    </div>
+  </footer>
+
+  <script>
+    // Form Handlers
+document.getElementById("complaintForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Thank you! Your complaint has been submitted successfully 💌");
+  this.reset();
+});
+
+document.getElementById("suggestionForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Thank you! Your message has been sent successfully 🌸");
+  this.reset();
+});
+
+
+  </script>
+    <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+  </script>
+  <script src="bot.js"></script>
+</body>
+</html>
