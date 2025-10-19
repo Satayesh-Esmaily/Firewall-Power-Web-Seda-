@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سِدا پلتفرم</title>
+
+  <!-- فونت فارسی وزیر یا شبنم برای ظاهر بهتر -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #A48374;
+      --primary-hover: #8C6B5F;
+      --secondary: #CBAD8D;
+      --text-dark: #3A2D28;
+      --text-muted: #A48374;
+      --bg-light: #F1EDE6;
+      --bg-section: #EBE3DB;
+      --max-width: 1100px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg-light);
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text-dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a i {
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    .btn-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-header:hover {
+      background: var(--primary-hover);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 60px 0;
+      background: var(--bg-section);
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h2 {
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .hero-text h2 span {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .hero-text h1 {
+      font-size: 36px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .hero-text h1 span {
+      color: var(--primary);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 450px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("22.png"); /* مسیر عکس */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 700px; 
+  border-radius: 10px;
+}
+
+    .hero-placeholder {
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: #D1C7BD;
+      border: 3px dashed var(--secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      width: 28px;
+      height: 22px;
+      gap: 5px;
+      transition: all 0.3s;
+    }
+
+    .hamburger span {
+      background: var(--text-dark);
+      height: 3px;
+      border-radius: 2px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      background: var(--bg-light);
+      border-top: 1px solid #ddd;
+      text-align: center;
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px 0;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 90;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a i {
+      color: var(--primary);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-nav.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+      }
+
+      .btn-header {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-sub {
+        margin: 0 auto 30px;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-image {
+        margin-top: 40px;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+/* Chatbot Floating Button */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+#chatbot-button {
+  width: 60px;
+  height: 60px;
+  background: #A48374;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+#chatbot-button:hover {
+  background: #8C6B5F;
+}
+
+/* Chatbot Window */
+#chatbot-window {
+  width: 320px;
+  height: 420px;
+  background: #F1EDE6;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+#chatbot-header {
+  background: #A48374;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Messages area */
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: calc(100% - 90px); /* جلوگیری از بیرون‌زدن محتوا */
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Input area */
+#chatbot-input-container {
+  display: flex;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+#chatbot-send {
+  padding: 8px 12px;
+  background: #A48374;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#chatbot-send:hover {
+  background: #8C6B5F;
+}
+
+/* پیام‌ها */
+.message {
+  display: flex;
+  margin: 6px 0;
+}
+
+.message .avatar {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+
+.message.user .avatar {
+  background: #A48374;
+  color: #fff;
+}
+
+.message.bot .avatar {
+  background: #ccc;
+  color: #333;
+}
+
+.message-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: #DCC7BD;
+  align-self: flex-end;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">سِدا<span>پلتفرم</span></div>
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fa-solid fa-house"></i> خانه</a></li>
+          <li><a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a></li>
+          <li><a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+          <li><a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+          <li><a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-header"><i class="fa-solid fa-download"></i> دانلود اپ</a>
+
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html"><i class="fa-solid fa-house"></i> خانه</a>
+      <a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a>
+      <a href="guide.html"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a>
+      <a href="quiz.html"><i class="fa-solid fa-pen-to-square"></i> آزمون</a>
+      <a href="library.html"><i class="fa-solid fa-book"></i> کتابخانه</a>
+      <a href="about.html"><i class="fa-solid fa-users"></i> درباره ما</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h2>امنیت <span>دیجیتال</span> برای زنان</h2>
+        <h1>یاد بگیر چگونه در <span>فضای آنلاین</span> امن بمانی</h1>
+        <p class="hero-sub">
+          توانمندسازی زنان افغان با مهارت‌های امنیت دیجیتال. یاد بگیر، محافظت کن و در فضای آنلاین ایمن بمان — بدون نیاز به ورود.
+        </p>
+        <div class="hero-buttons">
+          <a href="learn.html" class="btn-primary">شروع کنید</a>
+          <a href="guide.html" class="btn-outline">راهنمایی</a>
+        </div>
+      </div>
+      <div class="hero-image">
+      </div>
+    </div>
+  </section>
+  <!-- Chatbot Button -->
+<div id="chatbot-container">
+  <div id="chatbot-button">
+    <i class="fa-solid fa-robot" style="font-size:24px;"></i>
+  </div>
+
+  <div id="chatbot-window">
+    <div id="chatbot-header">
+      <span>چت بات سِدا</span>
+      <span id="chatbot-close" style="cursor:pointer;">&#10005;</span>
+    </div>
+    <div id="chatbot-messages">
+      
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="پیام خود را تایپ کنید..." />
+      <button id="chatbot-send">ارسال</button>
+    </div>
+  </div>
+</div>
+  <!-- FOOTER -->
+<footer style="background: #A48374; color: #fff; padding: 50px 0 20px; margin-top: 80px;">
+  <div class="container" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
+    <div style="flex:1; min-width:200px;">
+      <h3 style="font-size:18px; margin-bottom:15px; border-bottom:2px solid #CBAD8D; display:inline-block; padding-bottom:5px;">درباره ما</h3>
+      <p style="font-size:14px; line-height:1.8; color:#f1ede6;">
+        سِدا پلتفرم با هدف افزایش آگاهی زنان در زمینه امنیت دیجیتال طراحی شده است تا آنان بتوانند با اطمینان و آگاهی در فضای مجازی حضور داشته باشند.
+      </p>
+    </div>
+
+    <div style="flex:1; min-width:200px;">
+      <h3 style="font-size:18px; margin-bottom:15px; border-bottom:2px solid #CBAD8D; display:inline-block; padding-bottom:5px;">دسترسی سریع</h3>
+      <ul style="list-style:none; padding:0;">
+        <li><a href="index.html" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-house"></i> خانه</a></li>
+        <li><a href="guide.html" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-lightbulb"></i> راهنمایی</a></li>
+        <li><a href="library.html" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-book"></i> کتابخانه</a></li>
+        <li><a href="quiz.html" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-pen-to-square"></i> آزمون</a></li>
+      </ul>
+    </div>
+
+    <div style="flex:1; min-width:200px;">
+      <h3 style="font-size:18px; margin-bottom:15px; border-bottom:2px solid #CBAD8D; display:inline-block; padding-bottom:5px;">ارتباط با ما</h3>
+      <ul style="list-style:none; padding:0;">
+        <li><a href="mailto:info@sedaplatform.org" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-envelope"></i> ایمیل: info@sedaplatform.org</a></li>
+        <li><a href="#" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-brands fa-telegram"></i> تلگرام: @SedaPlatform</a></li>
+        <li><a href="#" style="color:#f1ede6; font-size:14px; display:flex; align-items:center; gap:6px;"><i class="fa-brands fa-facebook"></i> فیس‌بوک: Seda Platform</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:30px; font-size:13px; color:#f3eae2;">
+    © ۲۰۲۵ سِدا پلتفرم – تمامی حقوق محفوظ است.
+  </div>
+</footer>
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+  </script>
+  <script src="bot.js"></script>
+
+
+</body>
+</html>
