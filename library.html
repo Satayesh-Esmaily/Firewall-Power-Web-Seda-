@@ -17,7 +17,7 @@
       --bg-light:#F1EDE6; --bg-section:#EBE3DB; --max-width:1100px;
       --surface:#FFFFFF; --border:#D1C7BD; --radius:14px; --shadow:0 8px 24px rgba(58,45,40,.10);
       --h1: clamp(22px, 4vw, 28px);
-      --rating-yellow:#FFC107;             
+      --rating-yellow:#FFC107;
       --vh: 1vh;
     }
     *{margin:0;padding:0;box-sizing:border-box}
@@ -87,13 +87,26 @@
     .btn.primary:hover{background:var(--primary-hover)}
     #empty{text-align:center;color:var(--text-muted);display:none}
 
-    
-    .rating{display:inline-flex;direction:ltr;gap:4px;cursor:pointer;font-size:18px}
+     .rating{display:inline-flex;direction:ltr;gap:4px;cursor:pointer;font-size:18px}
     .rating i{color:#ddd}
     .rating i.active,
     .rating i:hover,
     .rating i:hover ~ i{color:var(--rating-yellow)}
     .rating-value{font-size:13px;color:var(--text-muted);margin-inline-start:6px}
+
+    /* Download button for books */
+    .book-btn{
+      display:inline-block;
+      background:var(--primary);
+      color:#fff;
+      padding:6px 14px;
+      border-radius:6px;
+      font-size:14px;
+      font-weight:600;
+      text-decoration:none;
+      transition:background .3s;
+    }
+    .book-btn:hover{ background:var(--primary-hover); }
 
     /* Drawer */
     .scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.2s;z-index:1090}
@@ -111,6 +124,134 @@
     footer h3{font-size:18px; margin-bottom:15px; border-bottom:2px solid #CBAD8D; display:inline-block; padding-bottom:5px}
     footer .about p{font-size:14px; line-height:1.8; color:#f1ede6}
     footer .copy{ text-align:center; margin-top:30px; font-size:13px; color:#f3eae2 }
+    /* Chatbot Floating Button */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+#chatbot-button {
+  width: 60px;
+  height: 60px;
+  background: #A48374;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+#chatbot-button:hover {
+  background: #8C6B5F;
+}
+
+/* Chatbot Window */
+#chatbot-window {
+  width: 320px;
+  height: 420px;
+  background: #F1EDE6;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+#chatbot-header {
+  background: #A48374;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Messages area */
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.5;
+  max-height: calc(100% - 90px);
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Input area */
+#chatbot-input-container {
+  display: flex;
+  border-top: 1px solid #ddd;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+#chatbot-send {
+  padding: 8px 12px;
+  background: #A48374;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#chatbot-send:hover { background: #8C6B5F; }
+
+/* Messages */
+.message {
+  display: flex;
+  margin: 6px 0;
+}
+.message .avatar {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+.message.user .avatar {
+  background: #A48374;
+  color: #fff;
+}
+.message.bot .avatar {
+  background: #ccc;
+  color: #333;
+}
+.message-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  max-width: 80%;
+  word-wrap: break-word;
+}
+.message.user .message-content {
+  background: #DCC7BD;
+  align-self: flex-end;
+}
+
   </style>
 </head>
 <body>
@@ -217,6 +358,24 @@
     </div>
   </aside>
 
+  <!-- Chatbot Button -->
+  <div id="chatbot-container">
+    <div id="chatbot-button">
+      <i class="fa-solid fa-robot" style="font-size:24px;"></i>
+    </div>
+    <div id="chatbot-window">
+      <div id="chatbot-header">
+        <span>چت بات سِدا</span>
+        <span id="chatbot-close" style="cursor:pointer;">&#10005;</span>
+      </div>
+      <div id="chatbot-messages"></div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="پیام خود را تایپ کنید..." />
+        <button id="chatbot-send">ارسال</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;">
@@ -290,8 +449,8 @@
           title:'کتابچهٔ حفاظت از داده‌های شخصی',
           desc:'پوشهٔ قفل‌شده، رمزگذاری فایل‌ها، حذف متادیتای عکس، بک‌آپ امن.',
           topic:['data-protection'], pages:48,
-          img:'images/Data.jpg',
-          url:'file:///C:/Users/UOD%20Student/Desktop/%DA%A9%D8%AA%D8%A7%D8%A8%DA%86%D9%87%D9%94%20%D8%AD%D9%81%D8%A7%D8%B8%D8%AA%20%D8%A7%D8%B2%20%D8%AF%D8%A7%D8%AF%D9%87%E2%80%8C%D9%87%D8%A7%DB%8C%20%D8%B4%D8%AE%D8%B5%DB%8C.pdf'
+          img:'images/0.jpg.jpg',
+          url:'https://rahavardresearch.com/book/harim-khosoosi-web.pdf'
         },
         // VIDEO (3)
         { id:'v-wifi', type:'video',
@@ -316,7 +475,7 @@
           desc:'چک‌لیست سریع: بستن نشست‌ها، تغییر رمزها، اطلاع به تماس امن، مستندسازی.',
           topic:['emergency'], pages:36,
           img:'images/Hack.jpg',
-          url:'https://falnic.com/blog/wp-content/uploads/2020/02/what-is-hack.pdf '
+          url:'https://falnic.com/blog/wp-content/uploads/2020/02/what-is-hack.pdf'
         },
         // VIDEO (4)
         { id:'v-malware', type:'video',
@@ -327,13 +486,13 @@
           img:'images/Malwar.jpg',
           url:'https://youtu.be/ZOncx-KD3IE?si=rzN34WgaWwdBbyFZ'
         },
-        // QUIZ  (opens the quiz page)
+        // QUIZ
         { id:'q-password', type:'quiz2',
           title:'کوییز: رمز قوی یا ضعیف؟',
           desc:'۵ سناریو برای تشخیص رمز قوی.',
           topic:['passwords'], questions:5,
           img:'images/Quiz1.jpg',
-          url:'quiz2.html?id=q-password'  
+          url:'quiz2.html?id=q-password'
         }
       ];
 
@@ -389,6 +548,7 @@
           </div>
           <div class="actions">
             <button class="btn small primary" data-act="open">${primaryCta(it.type)}</button>
+            ${it.type==='book' ? `<a class="book-btn" href="${it.url}" download><i class="fa-solid fa-download"></i> دانلود</a>` : ''}
           </div>`;
         const viewUrl=viewUrlOf(it);
         const open=()=> viewUrl ? window.open(viewUrl,'_blank','noopener') : openDrawer(it);
@@ -441,7 +601,13 @@
       });
 
       // Ratings (local only)
-      function initRatings(){ document.querySelectorAll('.rating').forEach(r=>{ const id=r.dataset.id; const stars=r.querySelectorAll('i'); const val=r.querySelector('.rating-value'); let v=ratings[id]||0; updateStars(stars,v); val.textContent=v?`(${Number(v).toFixed(1)})`:''; stars.forEach((s,i)=>{ s.addEventListener('click',()=>{ v=i+1; ratings[id]=v; localStorage.setItem('seda_ratings',JSON.stringify(ratings)); updateStars(stars,v); val.textContent=`(${Number(v).toFixed(1)})`; }); }); }); }
+      function initRatings(){
+        document.querySelectorAll('.rating').forEach(r=>{
+          const id=r.dataset.id; const stars=r.querySelectorAll('i'); const val=r.querySelector('.rating-value'); let v=ratings[id]||0;
+          updateStars(stars,v); val.textContent=v?`(${Number(v).toFixed(1)})`:'';
+          stars.forEach((s,i)=>{ s.addEventListener('click',()=>{ v=i+1; ratings[id]=v; localStorage.setItem('seda_ratings',JSON.stringify(ratings)); updateStars(stars,v); val.textContent=`(${Number(v).toFixed(1)})`; }); });
+        });
+      }
       function updateStars(stars,val){ stars.forEach((s,i)=>s.classList.toggle('active',i<val)); }
 
       // Helpers
@@ -455,5 +621,7 @@
       render();
     })();
   </script>
+
+  <script src="bot.js"></script>
 </body>
 </html>
