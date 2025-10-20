@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>سِدا پلتفرم | کتابخانه</title>
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-new.png">
+  <link rel="apple-touch-icon" href="favicon-new.png">
 
   <meta name="description" content="کتابخانه آموزشی امنیت دیجیتال – ویدیو، راهنما، کوییز و کتاب.">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -251,16 +253,57 @@
   background: #DCC7BD;
   align-self: flex-end;
 }
+html { font-size: 16px; }
+.mobile-nav.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* When active (clicked) */
+.mobile-nav.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* ✅ Animated Mobile Navigation */
+.mobile-nav {
+  position: absolute;
+  top: 70px; /* below header */
+  right: 0;
+  left: 0;
+  background: var(--bg-light);
+  border-top: 1px solid #ddd;
+  text-align: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 99;
+}
+
+.mobile-nav.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
 
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+<!-- HEADER -->
   <header>
     <div class="container header-inner">
       <div class="logo">سِدا<span>پلتفرم</span></div>
-      <nav aria-label="مسیرهای سایت">
+      <nav>
         <ul>
           <li><a href="index.html"><i class="fa-solid fa-house"></i> خانه</a></li>
           <li><a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a></li>
@@ -271,8 +314,16 @@
         </ul>
       </nav>
       <a href="#" class="btn-header"><i class="fa-solid fa-download"></i> دانلود اپ</a>
-      <button class="hamburger" id="hamburger" aria-label="باز و بسته کردن منو"><span></span><span></span><span></span></button>
+
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+
+    <!-- Mobile Menu -->
     <div class="mobile-nav" id="mobileNav">
       <a href="index.html"><i class="fa-solid fa-house"></i> خانه</a>
       <a href="learn.html"><i class="fa-solid fa-book-open"></i> یادگیری</a>
@@ -409,11 +460,7 @@
     const setVH=()=>{ document.documentElement.style.setProperty('--vh',(window.innerHeight*0.01)+'px'); };
     setVH(); window.addEventListener('resize', setVH);
 
-    /* hamburger */
-    const hamburger=document.getElementById('hamburger');
-    const mobileNav=document.getElementById('mobileNav');
-    hamburger.addEventListener('click',()=>{ const open=hamburger.classList.toggle('active'); mobileNav.classList.toggle('active',open); });
-
+  
     (function(){
 
       const ITEMS = [
@@ -620,6 +667,14 @@
 
       render();
     })();
+        const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+   
   </script>
 
   <script src="bot.js"></script>
